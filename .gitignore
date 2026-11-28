@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+build/
+.data/
+.env*.local
+.env
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+.DS_Store
+
+# assistant tooling scratch (temp uploads/backups)
+.abacusai-bot/

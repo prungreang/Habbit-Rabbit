@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --surface: 255 255 255;
+    --surface-2: 253 244 255;
+    --line: 240 226 250;
+    --ink: 30 27 75;
+    --ink-muted: 107 103 144;
+    --page: 253 244 255;
+  }
+
+  .dark {
+    --surface: 30 24 64;
+    --surface-2: 20 16 43;
+    --line: 46 38 87;
+    --ink: 245 240 255;
+    --ink-muted: 185 178 224;
+    --page: 20 16 43;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: rgb(var(--page));
+    color: rgb(var(--ink));
+    font-feature-settings: "cv02", "cv03", "cv04";
+    @apply antialiased;
+  }
+
+  /* A soft, pastel wash that is never busy enough to fight the content. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(45rem 30rem at 12% -8%, rgba(232, 121, 249, 0.16), transparent 65%),
+      radial-gradient(40rem 28rem at 92% 4%, rgba(56, 189, 248, 0.14), transparent 62%),
+      radial-gradient(38rem 26rem at 60% 108%, rgba(251, 191, 36, 0.13), transparent 60%);
+  }
+
+  .dark body::before {
+    background:
+      radial-gradient(45rem 30rem at 12% -8%, rgba(232, 121, 249, 0.14), transparent 65%),
+      radial-gradient(40rem 28rem at 92% 4%, rgba(56, 189, 248, 0.12), transparent 62%),
+      radial-gradient(38rem 26rem at 60% 108%, rgba(251, 191, 36, 0.08), transparent 60%);
+  }
+
+  ::selection {
+    background: rgba(232, 121, 249, 0.3);
+  }
+
+  :focus-visible {
+    outline: 3px solid rgb(56 189 248);
+    outline-offset: 2px;
+    border-radius: 0.75rem;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--line));
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px -12px rgba(30, 27, 75, 0.18);
+  }
+
+  .card-quiet {
+    background-color: rgb(var(--surface) / 0.7);
+    border: 1px solid rgb(var(--line));
+    border-radius: 1.5rem;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold
+      transition-all duration-200 ease-out active:scale-[.97] disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn text-white shadow-soft;
+    background-image: linear-gradient(120deg, #e879f9, #c084fc 55%, #38bdf8);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 14px 34px -14px rgba(232, 121, 249, 0.75);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply btn;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--ink));
+    border: 1px solid rgb(var(--line));
+  }
+  .btn-secondary:hover {
+    border-color: rgba(232, 121, 249, 0.55);
+    background-color: rgba(232, 121, 249, 0.08);
+  }
+
+  .btn-ghost {
+    @apply btn font-medium;
+    color: rgb(var(--ink-muted));
+  }
+  .btn-ghost:hover {
+    color: rgb(var(--ink));
+    background-color: rgba(232, 121, 249, 0.1);
+  }
+
+  .field {
+    @apply w-full rounded-2xl border px-4 py-2.5 text-sm transition-colors duration-200;
+    background-color: rgb(var(--surface));
+    border-color: rgb(var(--line));
+    color: rgb(var(--ink));
+  }
+  .field::placeholder {
+    color: rgb(var(--ink-muted) / 0.8);
+  }
+  .field:hover {
+    border-color: rgba(232, 121, 249, 0.45);
+  }
+  .field:focus {
+    border-color: #38bdf8;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider;
+    color: rgb(var(--ink-muted));
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .muted {
+    color: rgb(var(--ink-muted));
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--line) / 0.55) 25%,
+      rgb(var(--line) / 0.9) 37%,
+      rgb(var(--line) / 0.55) 63%
+    );
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+    @apply rounded-2xl;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
