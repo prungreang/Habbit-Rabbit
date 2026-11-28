@@ -104,9 +104,6 @@ export default async function HomePage() {
                   Start tracking — it&apos;s free
                   <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Link>
-                <Link href="/sign-in" className="btn-secondary px-6 py-3 text-base">
-                  See the demo
-                </Link>
               </div>
 
               <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1.5">
